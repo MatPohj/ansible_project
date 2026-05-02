@@ -1,2 +1,0 @@
-plugins/inventory/servers.py validate-modules:missing-gplv3-license
-plugins/modules/loadbalancer_backend_member.py validate-modules:missing-gplv3-license
