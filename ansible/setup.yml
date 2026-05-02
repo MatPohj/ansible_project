@@ -1,4 +1,6 @@
 - hosts: all
+  become: true
   roles:
-    - virtualmachine
-    
+    - base_config
+    - security
+    - users

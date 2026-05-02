@@ -1,1 +1,17 @@
-#Pohja
+- group:
+    name: "sudoless"
+    state: present
+- user:
+    name: "matti"
+    state: present
+    groups: ["sudoless", "sudo"]
+    shell: /bin/bash
+- authorized_key:
+    user: "matti"
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3ephb4+s3jWbhMdop803jSUrUb4CJRzERxcjd2KizP htb@htb"
+- copy:
+    dest: "/etc/sudoers.d/sudoless"
+    content: "%sudoless ALL = (ALL) NOPASSWD: ALL\n"
+    owner: "root"
+    group: "root"
+    mode: "0644"

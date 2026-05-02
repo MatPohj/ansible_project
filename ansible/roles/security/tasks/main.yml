@@ -1,1 +1,13 @@
-#Pohja
+- name: Asenna UFW
+  apt:
+    name: ufw
+    state: present
+
+- name: Salli SSH UFW:ssa
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Ota UFW käyttöön
+  community.general.ufw:
+    state: enabled

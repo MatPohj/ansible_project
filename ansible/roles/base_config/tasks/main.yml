@@ -1,1 +1,9 @@
-#Pohja
+- name: Päivitä apt cache
+  apt:
+    update_cache: yes
+
+- name: Päivitä kaikki paketit
+  apt:
+    upgrade: dist
+    autoremove: yes
+    autoclean: yes
