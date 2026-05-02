@@ -1,0 +1,47 @@
+name: Build and release new version
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  NAMESPACE: upcloud
+  COLLECTION_NAME: cloud
+  ANSIBLE_VERSION: stable-2.18
+
+jobs:
+  units:
+    runs-on: ubuntu-latest
+    name: Build and release
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+      - name: Install ansible-base (${{env.ANSIBLE_VERSION}})
+        run: pip install https://github.com/ansible/ansible/archive/${{env.ANSIBLE_VERSION}}.tar.gz --disable-pip-version-check
+
+      - name: Build project release
+        run: |
+          version=$(grep "version" galaxy.yml | sed -E "s/version:\s+//")
+          test "${{ github.ref_name }}" = "v$version"
+          sed -E "s/(VERSION\s+=\s+).*/\1\"$version\"/" -i plugins/module_utils/client.py
+          mkdir release && ansible-galaxy collection build --output-path release/
+
+      - name: Create new release
+        uses: ncipollo/release-action@v1.16.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: true
+          prerelease: false
+          artifacts: "release/${{env.NAMESPACE}}-${{env.COLLECTION_NAME}}*.tar.gz"
+
+      - name: Upload release to Ansible Galaxy
+        uses: artis3n/ansible_galaxy_collection@v2.11.0
+        with:
+          api_key: ${{ secrets.GALAXY_TOKEN }}
