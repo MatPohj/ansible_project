@@ -7,3 +7,14 @@
     upgrade: dist
     autoremove: yes
     autoclean: yes
+
+- name : Asennat peruspaketit
+  apt: 
+    name:
+      - curl
+      - micro
+      - bash-completion
+      - tree
+      - git
+      - wget
+    state: present
