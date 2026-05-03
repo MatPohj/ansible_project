@@ -2,14 +2,14 @@
 Repository for ansible project
 
 ## TODO
-- Siisti  terraform tiedosto
-
-- Automatisoi terraform asennus omalle koneelle https://upcloud.com/docs/guides/get-started-ansible-inventory/
-	- automatisoi koko setti
-
-
 - Dokumentaatio miten käyttää, mitä tekee, mitä käyttäjän pitää tehdä manuaalisesti.
-- asenna jotain paketteja
-- 
+- Läpi esitys/demo kellotus kauan menee ja miten tehdään.
+- Varmuuden vuoks demo video?! 
 
-sudo apt update && sudo apt install -y python3-pip && pip3 install "upcloud-api>=2.5.0" --break-system-packages && ansible-galaxy collection install upcloud.cloud
+Resources used:
+- https://upcloud.com/docs/guides/get-started-ansible-inventory/
+- https://upcloud.com/docs/guides/rolling-update-terraform-ansible/
+- https://github.com/UpCloudLtd/upcloud-ansible-collection
+	- From here we've used and modifed the terraform template/examples/inventory-rolling-update/resources/main.tf https://github.com/UpCloudLtd/upcloud-ansible-collection/blob/main/examples/inventory-rolling-update/resources/main.tf
+- https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+- 
