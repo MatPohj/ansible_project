@@ -9,12 +9,12 @@ terraform {
 
 variable "prefix" {
   type    = string
-  default = "ansible-inventory-serveri"
+  default = "ansible"
 }
 
 variable "zone" {
   type    = string
-  default = "pl-waw1"
+  default = "fi-hel1"
 }
 
 locals {
@@ -22,16 +22,16 @@ locals {
   publickey          = file("~/.ssh/${local.publickey_filename}")
 }
 
-resource "upcloud_network" "network" {
-  name = "${var.prefix}net"
-  zone = var.zone
-
-  ip_network {
-    family  = "IPv4"
-    address = "10.100.1.0/24"
-    dhcp    = true
-  }
-}
+# resource "upcloud_network" "network" {
+#   name = "${var.prefix}net"
+#   zone = var.zone
+#
+#   ip_network {
+#     family  = "IPv4"
+#     address = "10.100.1.0/24"
+#     dhcp    = true
+#   }
+# }
 
 resource "upcloud_server" "webservers" {
   count    = 2
@@ -65,10 +65,10 @@ resource "upcloud_server" "webservers" {
     type = "utility"
   }
 
-  network_interface {
-    type    = "private"
-    network = upcloud_network.network.id
-  }
+#   network_interface {
+#     type    = "private"
+#     network = upcloud_network.network.id
+#   }
 }
 
 resource "upcloud_server_group" "webservers" {
@@ -77,7 +77,6 @@ resource "upcloud_server_group" "webservers" {
   members = upcloud_server.webservers[*].id
 }
 
-# Added output so you can still easily get the server IPs
 output "server_public_ips" {
   description = "Public IP addresses of the deployed webservers"
   value       = [for s in upcloud_server.webservers : s.network_interface[0].ip_address]
