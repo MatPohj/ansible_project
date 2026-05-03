@@ -1,6 +1,0 @@
-- name: Asenna Terraform localhostiin
-  apt:
-    name:
-      - terraform
-    state: present
-    update_cache: yes
