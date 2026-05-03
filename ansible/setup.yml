@@ -1,4 +1,9 @@
-- hosts: all
+- hosts: localhost
+  become: true
+  roles: 
+    - terraform
+  
+- hosts: all:localhost
   become: true
   roles:
     - base_config
