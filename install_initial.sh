@@ -13,7 +13,10 @@ ansible-galaxy collection install upcloud.cloud
 
 # 2. Install GPG and software properties
 echo "Installing gnupg and software-properties-common..."
-sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
+sudo apt-get update && sudo apt-get install -y gnupg coreutil curl ssh ansible
+
+# make ssh key
+ssh-keygen
 
 # 3. Add HashiCorp GPG key
 echo "Adding HashiCorp GPG key..."

@@ -34,7 +34,7 @@ locals {
 # }
 
 resource "upcloud_server" "webservers" {
-  count    = 2
+  count    = 1
   hostname = "${var.prefix}server-${count.index}"
   title    = "${var.prefix}server-${count.index}"
   zone     = var.zone
