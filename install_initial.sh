@@ -7,14 +7,13 @@ echo "--- Starting Infrastructure Tooling Installation ---"
 
 # 1. Update system and install Python/Ansible dependencies
 echo "Installing Python3, Pip, and UpCloud Ansible collection..."
-sudo apt update && sudo apt install -y python3-pip
+sudo apt update && sudo apt install -y python3-pip ansible
 pip3 install "upcloud-api>=2.5.0" --break-system-packages
 ansible-galaxy collection install upcloud.cloud
 
 # 2. Install GPG and software properties
 echo "Installing gnupg and software-properties-common..."
-sudo apt-get update && sudo apt-get install -y gnupg coreutil curl ssh ansible
-
+sudo apt-get update && sudo apt-get install -y gnupg coreutil curl ssh
 # make ssh key
 ssh-keygen
 
