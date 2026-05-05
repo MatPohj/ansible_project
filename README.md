@@ -45,7 +45,12 @@ If you already have computers to controll you can skip this first part
 
 If you want to know what ansible will run (probably you do) read below.
 
-- 
+- In roles there are
+  - base_config which updates&upgrades apt and installs basic packages that you'll want the computers to have. In our script we've decided to install curl, micro, bash-completion, tree, git and wget. Feel free to change these to fit your purpose.
+  - security, installs UFW which is a firewall. The it makes a rule to only allow openssh and finally it enables the ufw.
+  - users which makes a group `sudoless` which allows ansible to run nicely without always prompting to type password. Then it add's a user to sudoless and sudo group and defines a shell for the user.
+  - It adds a ssh key for the user so ansible can connect to it. Add your own public ssh key to it.
+  - Finally it changes the sudoers.d file to make the sudoless group to actually do its purpose. 
 
 
 
