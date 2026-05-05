@@ -20,25 +20,46 @@ Repository for a ansible project. The meaning of the project is to automatize cr
 If you already have computers to controll you can skip this first part
 ### Terraform
 1. Clone this repository or use wget 
-2. Just simply run  ``bash install_initial.sh`` or install the dependencies by hand. 
+2. Just simply run  ``bash install_initial.sh`` or install the dependencies by hand. When it's installing the ssh you'll have to press enter a couple times to continue the installation.
 3. After the script has run you should see the following print in console. If you don't see it or you have installed by hand just run ``terraform -version``.
 
 	--- Installation Complete! ---
 	Terraform v1.15.1
 	on linux_amd64
-4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `resource` part to configure the plan (meaning how much compute power) to your liking. Also the `template` part to your wanted OS and it's size.
+
+![alt text](images/image.png)
+
+4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `resource` part to configure the plan (meaning how much compute power) to your liking. Also the `template` part to your wanted OS and it's size. 
 
 	-	<img width="813" height="381" alt="image" src="https://github.com/user-attachments/assets/49ea8b50-b311-4de9-a58f-64218eaec0ce" />
 
 
 5. Export API token from Upcloud `export UPCLOUD_TOKEN="ucat_..."`
-   	-	You can get the API token from Upcloud-People-(Your user)-API Tokens-Add new Api token
+   	-	You can get the API token from Upcloud --> People --> (Your user) --> API Tokens --> Add new Api token
    	  
    	-	<img width="1892" height="826" alt="image" src="https://github.com/user-attachments/assets/ad609a67-a9e8-40a0-a366-6e432f34cd27" />
 
-7. Go to the ``terraform/ ``folder and run terraform init
-8. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making.
-9. Once it's finished it will type out the ip's of the generated computers.
+6. Go to the ``terraform/ ``folder and run terraform init
+   
+![alt text](images/image1.png)
+
+7. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making. 
+
+If you forgot to add the API key, it'll give you a error like this
+
+![alt text](images/image2.png)
+
+When you have the API key correct, type yes and enter
+
+![alt text](images/image3.png)
+
+8.  Once it's finished it will type out the ip's of the generated computers.
+
+![alt text](images/image4.png)
+
+And here is how it will look in upcloud  server tab
+
+![alt text](images/image5.png)
 
 ### Ansible
 
@@ -46,7 +67,21 @@ If you already have computers to controll you can skip this first part
 
 	-  <img width="782" height="114" alt="image" src="https://github.com/user-attachments/assets/4e564de2-ac9c-4f76-b5c9-ee882e829c2b" />
 
-2. And now just run `ansible-playbook setup.yml`
+2. At this point, you will also need to put the PUBLIC ssh key of the computer you are running this from. The public key can be found from the `.ssh` folder of the user and it ends in `.pub`
+
+![alt text](images/image6.png)
+
+3. And now just run `ansible-playbook setup.yml`
+
+It'll take a while and the last line of the output should look like this
+
+![alt text](images/image7.png)
+
+Now you can ssh into username@ip (the username from the ansible script next to ssh public key). 
+
+![alt text](images/image8.png)
+
+Now you can make some more automation trough ansible!
 
 If you want to know what ansible will run (probably you do) read below.
 
@@ -59,7 +94,7 @@ If you want to know what ansible will run (probably you do) read below.
 
 ## TLDR on what to do before running
 - Modify the `terraform/main.tf` to make as many computers with the specs you want.
-- Add your ssh key to `ansible/roles/users/tasks/main.yml`
+- Add your public ssh key to `ansible/roles/users/tasks/main.yml`. Also change the user name you want to make and also the user where the key is put
 - Add the user names and ip's to `ansible/hosts.ini`. The user names are the ones defined in the `terraform/main.tf`. By default it's admin.
 - Run `terraform init` and `terraform apply`. 
 - Run `ansible-playbook setup.yml`
