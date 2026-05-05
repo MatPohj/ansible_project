@@ -21,6 +21,34 @@ Repository for a ansible project. The meaning of the project is to automatize cr
 - Ansible folder
 	- All you have to do to control the computers you already have or just made with terraform you just need to insert their ip's to hosts.ini
 
+## How to run and use?
+If you already have computers to controll you can skip this first part
+### Terraform
+1. Clone this repository or use wget 
+2. Just simply run  ``bash install_initial.sh`` or install the dependencies by hand. 
+3. After the script has run you should see the following print in console. If you don't see it or you have installed by hand just run ``terraform -version``.
+
+	--- Installation Complete! ---
+	Terraform v1.15.1
+	on linux_amd64
+4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `template` part to your wanted OS and it's size. Also the `resource` part to configure the plan (meaning how much compute power) to your liking. 
+5. Go to the ``terraform/ ``folder and run terraform init
+6. Export API token from Upcloud `export UPCLOUD_TOKEN="ucat_..."`
+7. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making.
+8. Once it's finished it will type out the ip's of the generated computers.
+
+### Ansible
+
+1. Put the ip's and the users of the computers you want to control and ssh to `ansible/hosts.ini`. By default when making a computer in upcloud, it doesn't make any other users so only root is available. The terraform script makes an admin account so that's who we're connecting to while ssh'ing. Meaning it is admin@ip
+
+2. And now just run `ansible-playbook setup.yml`
+
+If you want to know what ansible will run (probably you do) read below.
+
+- 
+
+
+
 Resources used:
 - https://upcloud.com/docs/guides/get-started-ansible-inventory/
 - https://upcloud.com/docs/guides/rolling-update-terraform-ansible/
