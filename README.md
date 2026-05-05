@@ -1,13 +1,8 @@
-# ansible_project
+# Ansible_project
 Repository for a ansible project. The meaning of the project is to automatize creating and controlling unlimited amount of computers with the following tools:
 - Terraform: Making x amount of cloud computers from a chosen service. For this project we've chosen Upcloud. The terraform template used in this procets was taken from one of their example [files](https://github.com/UpCloudLtd/upcloud-ansible-collection/blob/main/examples/inventory-rolling-update/resources/main.tf) 
 - Ansible: Automate configuring/controlling the chosen computers made with Terraform. You can also only use the  Ansible part for existing computer(s).
 
-
-## TODO
-- Dokumentaatio miten käyttää, mitä tekee, mitä käyttäjän pitää tehdä manuaalisesti.
-- Läpi esitys/demo kellotus kauan menee ja miten tehdään.
-- Varmuuden vuoks demo video?! 
 
 ## What is inside this repo?
 - install_initial.sh a shell script which installs the prequisites for running terraform and ansible. It runs the following:
@@ -31,9 +26,16 @@ If you already have computers to controll you can skip this first part
 	--- Installation Complete! ---
 	Terraform v1.15.1
 	on linux_amd64
-4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `template` part to your wanted OS and it's size. Also the `resource` part to configure the plan (meaning how much compute power) to your liking.
+4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `resource` part to configure the plan (meaning how much compute power) to your liking. Also the `template` part to your wanted OS and it's size.
+
+	-	<img width="813" height="381" alt="image" src="https://github.com/user-attachments/assets/49ea8b50-b311-4de9-a58f-64218eaec0ce" />
+
+
 5. Export API token from Upcloud `export UPCLOUD_TOKEN="ucat_..."`
    	-	You can get the API token from Upcloud-People-(Your user)-API Tokens-Add new Api token
+   	  
+   	-	<img width="1892" height="826" alt="image" src="https://github.com/user-attachments/assets/ad609a67-a9e8-40a0-a366-6e432f34cd27" />
+
 7. Go to the ``terraform/ ``folder and run terraform init
 8. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making.
 9. Once it's finished it will type out the ip's of the generated computers.
@@ -41,6 +43,8 @@ If you already have computers to controll you can skip this first part
 ### Ansible
 
 1. Put the ip's and the users of the computers you want to control and ssh to `ansible/hosts.ini`. By default when making a computer in upcloud, it doesn't make any other users so only root is available. The terraform script makes an admin account so that's who we're connecting to while ssh'ing. Meaning it is admin@ip
+
+	-  <img width="782" height="114" alt="image" src="https://github.com/user-attachments/assets/4e564de2-ac9c-4f76-b5c9-ee882e829c2b" />
 
 2. And now just run `ansible-playbook setup.yml`
 
