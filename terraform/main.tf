@@ -20,18 +20,8 @@ variable "zone" {
 locals {
   publickey_filename = one(fileset(pathexpand("~/.ssh/"), "*.pub"))
   publickey          = file("~/.ssh/${local.publickey_filename}")
+  login_user         = "admin"
 }
-
-# resource "upcloud_network" "network" {
-#   name = "${var.prefix}net"
-#   zone = var.zone
-#
-#   ip_network {
-#     family  = "IPv4"
-#     address = "10.100.1.0/24"
-#     dhcp    = true
-#   }
-# }
 
 resource "upcloud_server" "webservers" {
   count    = 1
@@ -43,7 +33,7 @@ resource "upcloud_server" "webservers" {
   metadata = true
 
   login {
-    user = "admin"
+    user = local.login_user
     keys = [
       local.publickey,
     ]
@@ -64,11 +54,6 @@ resource "upcloud_server" "webservers" {
   network_interface {
     type = "utility"
   }
-
-#   network_interface {
-#     type    = "private"
-#     network = upcloud_network.network.id
-#   }
 }
 
 resource "upcloud_server_group" "webservers" {
@@ -79,5 +64,5 @@ resource "upcloud_server_group" "webservers" {
 
 output "server_public_ips" {
   description = "Public IP addresses of the deployed webservers"
-  value       = [for s in upcloud_server.webservers : s.network_interface[0].ip_address]
+  value       = [for s in upcloud_server.webservers : "${local.login_user}@${s.network_interface[0].ip_address}"]
 }
