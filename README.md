@@ -1,6 +1,6 @@
 # Ansible_project
 Repository for a ansible project. The meaning of the project is to automatize creating and controlling unlimited amount of computers with the following tools:
-- Terraform: Making x amount of cloud computers from a chosen service. For this project we've chosen Upcloud. The terraform template used in this procets was taken from one of their example [files](https://github.com/UpCloudLtd/upcloud-ansible-collection/blob/main/examples/inventory-rolling-update/resources/main.tf) 
+- Terraform: Making x amount of cloud computers from a chosen service. For this project we've chosen Upcloud. The terraform template used in this project was taken from one of their example [files](https://github.com/UpCloudLtd/upcloud-ansible-collection/blob/main/examples/inventory-rolling-update/resources/main.tf) 
 - Ansible: Automate configuring/controlling the chosen computers made with Terraform. You can also only use the  Ansible part for existing computer(s).
 
 Imagine doing this in just a couple minutes! 
