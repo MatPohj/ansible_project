@@ -52,6 +52,12 @@ If you want to know what ansible will run (probably you do) read below.
   - It adds a ssh key for the user so ansible can connect to it. Add your own public ssh key to it.
   - Finally it changes the sudoers.d file to make the sudoless group to actually do its purpose. 
 
+## TLDR on what to do before running
+- Modify the `terraform/main.tf` to make as many computers with the specs you want.
+- Add your ssh key to `ansible/roles/users/tasks/main.yml`
+- Add the user names and ip's to `ansible/hosts.ini`. The user names are the ones defined in the `terraform/main.tf`. By default it's admin.
+- Run `terraform init` and `terraform apply`. 
+- Run `ansible-playbook setup.yml`
 
 
 Resources used:
