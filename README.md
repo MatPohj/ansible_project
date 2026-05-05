@@ -31,11 +31,12 @@ If you already have computers to controll you can skip this first part
 	--- Installation Complete! ---
 	Terraform v1.15.1
 	on linux_amd64
-4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `template` part to your wanted OS and it's size. Also the `resource` part to configure the plan (meaning how much compute power) to your liking. 
-5. Go to the ``terraform/ ``folder and run terraform init
-6. Export API token from Upcloud `export UPCLOUD_TOKEN="ucat_..."`
-7. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making.
-8. Once it's finished it will type out the ip's of the generated computers.
+4. Edit the `terraform/main.tf` file to your preferences. Probably you want to change the `template` part to your wanted OS and it's size. Also the `resource` part to configure the plan (meaning how much compute power) to your liking.
+5. Export API token from Upcloud `export UPCLOUD_TOKEN="ucat_..."`
+   	-	You can get the API token from Upcloud-People-(Your user)-API Tokens-Add new Api token
+7. Go to the ``terraform/ ``folder and run terraform init
+8. Run terraform apply. It should ask you to type yes to confirm you want to run the script. At this point you can check what it's making.
+9. Once it's finished it will type out the ip's of the generated computers.
 
 ### Ansible
 
