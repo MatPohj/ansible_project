@@ -105,6 +105,9 @@ If you want to know what ansible will run (probably you do) read below.
 - Run `terraform init` and `terraform apply`. 
 - Run `ansible-playbook setup.yml`
 
+## Contributors:
+[Santeri](https://github.com/Jesaka)
+[Matti](https://github.com/MatPohj)
 
 Resources used:
 - https://upcloud.com/docs/guides/get-started-ansible-inventory/
