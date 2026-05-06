@@ -109,6 +109,7 @@ If you want to know what ansible will run (probably you do) read below.
 [Santeri](https://github.com/Jesaka)
 [Matti](https://github.com/MatPohj)
 
+## Resources
 Resources used:
 - https://upcloud.com/docs/guides/get-started-ansible-inventory/
 - https://upcloud.com/docs/guides/rolling-update-terraform-ansible/
