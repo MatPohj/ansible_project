@@ -22,6 +22,30 @@ Imagine doing this in just a couple minutes!
 - Ansible folder
 	- All you have to do to control the computers you already have or just made with terraform you just need to insert their ip's to hosts.ini
 
+## Project structure
+
+	.
+	├── install_initial.sh
+	├── LICENSE
+	├── README.md
+	├── ansible/
+	│   ├── ansible.cfg
+	│   ├── hosts.ini
+	│   ├── setup.yml
+	│   └── roles/
+	│       ├── base_config/
+	│       │   └── tasks/
+	│       │       └── main.yml
+	│       ├── security/
+	│       │   └── tasks/
+	│       │       └── main.yml
+	│       └── users/
+	│           └── tasks/
+	│               └── main.yml
+	├── images/
+	└── terraform/
+		└── main.tf
+
 ## How to run and use?
 If you already have computers to controll you can skip this first part
 ### Terraform
